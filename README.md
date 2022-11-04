@@ -1,6 +1,6 @@
 # scratch
 
-
+```
 conda activate vitis-ai-tensorflow
 source /workspace/setup/vck5000/setup.sh DPUCVDX8H_8pe_normal
 
@@ -29,3 +29,4 @@ vai_c_tensorflow --arch /opt/vitis_ai/compiler/arch/DPUCADF8H/U200/arch.json --f
 ./build.sh
 
 ./inception_example ./out/tf_inception_v1_compiled.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min![image](https://user-images.githubusercontent.com/15679370/200009938-755844ab-ed83-4f9e-b64e-c7f89eeb1842.png)
+```
