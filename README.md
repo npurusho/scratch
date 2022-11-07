@@ -30,3 +30,27 @@ vai_c_tensorflow --arch /opt/vitis_ai/compiler/arch/DPUCADF8H/U200/arch.json --f
 
 ./inception_example ./out/tf_inception_v1_compiled.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min![image](https://user-images.githubusercontent.com/15679370/200009938-755844ab-ed83-4f9e-b64e-c7f89eeb1842.png)
 ```
+[UNILOG][INFO] Total device subgraph number 3, DPU subgraph number 1
+[UNILOG][INFO] Compile done.
+[UNILOG][INFO] The meta json is saved to "/workspace/examples/DPUCVDX8H/tf_inception_v1/out/meta.json"
+[UNILOG][INFO] The compiled xmodel is saved to "/workspace/examples/DPUCVDX8H/tf_inception_v1/out/tf_inception_v1_compiled.xmodel"
+[UNILOG][INFO] The compiled xmodel's md5sum is 51dca0e8b69573018370e5a887b0e9ca, and has been saved to "/workspace/examples/DPUCVDX8H/tf_inception_v1/out/md5sum.txt"
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > 
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > ./build.sh
+No LSB modules are available.
+No LSB modules are available.
+g++ (Ubuntu 9.4.0-1ubuntu1~18.04) 9.4.0
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > 
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > ./inception_example ./out/tf_inception_v1_compiled.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+
+
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I1106 22:15:19.073873   399 main.cc:293] create running for subgraph: subgraph_InceptionV1/InceptionV1/Conv2d_1a_7x7/Conv2D
+
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Error: Could not acquire CU
+Aborted (core dumped)
