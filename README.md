@@ -57,4 +57,35 @@ terminate called after throwing an instance of 'std::runtime_error'
   what():  Error: Could not acquire CU
 Aborted (core dumped)
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+Vitis-AI /workspace >  conda activate vitis-ai-tensorflow
+(vitis-ai-tensorflow) Vitis-AI /workspace > source /workspace/setup/vck5000/setup.sh DPUCVDX8H_8pe_normal
+------------------
+VAI_HOME = /vitis_ai_home
+------------------
+XILINX_XRT        : /opt/xilinx/xrt
+PATH              : /opt/xilinx/xrt/bin:/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/bin:/opt/vitis_ai/conda/bin:/opt/vitis_ai/conda/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+LD_LIBRARY_PATH   : /opt/xilinx/xrt/lib:/opt/xilinx/xrt/lib:/usr/lib:/usr/lib/x86_64-linux-gnu
+PYTHONPATH        : /opt/xilinx/xrt/python:
+---------------------
+XILINX_XRT = /opt/xilinx/xrt
+---------------------
+XILINX_XRM      : /opt/xilinx/xrm
+PATH            : /opt/xilinx/xrm/bin:/opt/xilinx/xrt/bin:/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/bin:/opt/vitis_ai/conda/bin:/opt/vitis_ai/conda/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+LD_LIBRARY_PATH : /opt/xilinx/xrm/lib:/opt/xilinx/xrt/lib:/opt/xilinx/xrt/lib:/usr/lib:/usr/lib/x86_64-linux-gnu
+---------------------
+XILINX_XRM = /opt/xilinx/xrm
+---------------------
+---------------------
+LD_LIBRARY_PATH = /opt/xilinx/xrm/lib:/opt/xilinx/xrt/lib:/opt/xilinx/xrt/lib:/usr/lib:/usr/lib/x86_64-linux-gnu
+---------------------
+  [0000:03:00.1] : xilinx_vck5000_gen3x16_xdma_base_1 user(inst=129) 
+vck5000_ card detected
+---------------------
+XCLBIN_PATH = /opt/xilinx/overlaybins/DPUCVDX8H/8PE
+XLNX_VART_FIRMWARE = /opt/xilinx/overlaybins/DPUCVDX8H/8PE/dpu_DPUCVDX8H_8PE_350M_xilinx_vck5000_gen3x16_xdma_base_1.xclbin
+---------------------
+
+
 ```
