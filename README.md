@@ -29,7 +29,9 @@ vai_c_tensorflow --arch /opt/vitis_ai/compiler/arch/DPUCADF8H/U200/arch.json --f
 ./build.sh
 
 ./inception_example ./out/tf_inception_v1_compiled.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min![image](https://user-images.githubusercontent.com/15679370/200009938-755844ab-ed83-4f9e-b64e-c7f89eeb1842.png)
-```
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 [UNILOG][INFO] Total device subgraph number 3, DPU subgraph number 1
 [UNILOG][INFO] Compile done.
 [UNILOG][INFO] The meta json is saved to "/workspace/examples/DPUCVDX8H/tf_inception_v1/out/meta.json"
@@ -54,3 +56,5 @@ I1106 22:15:19.073873   399 main.cc:293] create running for subgraph: subgraph_I
 terminate called after throwing an instance of 'std::runtime_error'
   what():  Error: Could not acquire CU
 Aborted (core dumped)
+
+```
