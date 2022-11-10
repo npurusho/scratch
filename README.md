@@ -89,3 +89,5 @@ XLNX_VART_FIRMWARE = /opt/xilinx/overlaybins/DPUCVDX8H/8PE/dpu_DPUCVDX8H_8PE_350
 
 
 ```
+
+/opt/xilinx/xrt/bin/xbutil program -p ***xclbin
