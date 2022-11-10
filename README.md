@@ -16,11 +16,11 @@ python3 downloader.py
 tf inceptionv1
 
 
-mv tf_inceptionv1_imagenet_224_224_3G_1.4.zip /workspace/examples/DPUCVDX8H/tf_inception_v1/
+mv tf_inceptionv1_imagenet_224_224_3G_2.5.zip /workspace/examples/DPUCVDX8H/tf_inception_v1/
 cd /workspace/examples/DPUCVDX8H/tf_inception_v1/
-unzip tf_inceptionv1_imagenet_224_224_3G_1.4.zip
+unzip tf_inceptionv1_imagenet_224_224_3G_2.5.zip
 
-cp tf_inceptionv1_imagenet_224_224_3G_1.4/float/inception_v1_inference.pb .
+cp tf_inceptionv1_imagenet_224_224_3G_2.5/float/inception_v1_inference.pb .
 
 vai_q_tensorflow quantize --input_frozen_graph inception_v1_inference.pb --input_nodes input --output_nodes InceptionV1/Logits/Predictions/Reshape_1 --input_fn utils.input_fn_inception_v1_tf --input_shapes ?,224,224,3 --calib_iter 50
 
