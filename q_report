@@ -1,0 +1,811 @@
+
+    input_fn = _parse_input_fn(flags.input_fn)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 263, in _parse_input_fn
+    raise ValueError('Fail to import input_fn, error: ', e)
+ValueError: ('Fail to import input_fn, error: ', FileNotFoundError(2, 'No such file or directory'))
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > ls
+build.sh                   README.md
+inception_example          src
+inception_v1_inference.pb  tf_inceptionv1_imagenet_224_224_3G_2.5
+inspect_tf_model.sh        tf_inceptionv1_imagenet_224_224_3G_2.5.zip
+out                        utils.py
+__pycache__                vai_c_tensorflow
+q_log                      words.txt
+quantize_results
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > vai_q_tensorflow quantize --input_frozen_graph inception_v1_inference.pb --input_nodes input --output_nodes InceptionV1/Logits/Predictions/Reshape_1 --input_fn utils.input_fn_inception_v1_tf --input_shapes ?,224,224,3 --calib_iter 50
+Traceback (most recent call last):
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 260, in _parse_input_fn
+    module = __import__(input_fn_str.rsplit('.', 1)[0], fromlist=True)
+  File "/workspace/examples/DPUCVDX8H/tf_inception_v1/utils.py", line 110, in <module>
+    globals()['input_fn_{}'.format(name)] = get_input_fn(name)
+  File "/workspace/examples/DPUCVDX8H/tf_inception_v1/utils.py", line 104, in get_input_fn
+    with open(imagelist) as fin:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/val.txt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/bin/vai_q_tensorflow", line 11, in <module>
+    sys.exit(run_main())
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 1255, in run_main
+    app.run(main=my_main, argv=[sys.argv[0]] + unparsed)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/platform/app.py", line 40, in run
+    _run(main=main, argv=argv, flags_parser=_parse_flags_tolerate_undef)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/absl/app.py", line 312, in run
+    _run_main(main, args)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/absl/app.py", line 258, in _run_main
+    sys.exit(main(argv))
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 1254, in <lambda>
+    my_main = lambda unused_args: main(unused_args, FLAGS)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 821, in main
+    input_fn = _parse_input_fn(flags.input_fn)
+  File "/opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/contrib/decent_q/python/decent_q.py", line 263, in _parse_input_fn
+    raise ValueError('Fail to import input_fn, error: ', e)
+ValueError: ('Fail to import input_fn, error: ', FileNotFoundError(2, 'No such file or directory'))
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > python -m ck pull repo:ck-env
+https://github.com/ctuning/ck-env
+
+  cd /home/vitis-ai-user/CK/ck-env
+  git clone https://github.com/ctuning/ck-env /home/vitis-ai-user/CK/ck-env
+
+Cloning into '/home/vitis-ai-user/CK/ck-env'...
+remote: Enumerating objects: 24343, done.
+remote: Counting objects: 100% (77/77), done.
+remote: Compressing objects: 100% (45/45), done.
+remote: Total 24343 (delta 35), reused 68 (delta 32), pack-reused 24266
+Receiving objects: 100% (24343/24343), 17.22 MiB | 23.11 MiB/s, done.
+Resolving deltas: 100% (13578/13578), done.
+
+Cloned repository has the following info:
+ UID                = 1ff43ae88715a8c1
+ UOA                = ck-env
+ User friendly name = ck-env
+
+
+CK repository successfully registered!
+
+CK repo description path = /home/vitis-ai-user/CK/local/repo/ck-env
+CK repo UID              = 1ff43ae88715a8c1
+
+Recaching repos to speed up access ...
+
+Skipping repo local ...
+Skipping repo default ...
+Processing repo ck-env ...
+Processing repo remote-ck ...
+
+Repositories were successfully recached!
+  ========================================
+  Processing Python requirements ...
+
+  /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/bin/python -m pip install -r /home/vitis-ai-user/CK/ck-env/requirements.txt
+
+Requirement already satisfied: ck in /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages (from -r /home/vitis-ai-user/CK/ck-env/requirements.txt (line 1)) (2.6.1)
+Requirement already satisfied: pyyaml in /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages (from ck->-r /home/vitis-ai-user/CK/ck-env/requirements.txt (line 1)) (5.4.1)
+  ========================================
+  Checking dependencies on other repos ...
+
+  Dependency on repository ck-web : should be resolved ...
+
+  Resolving dependency on repo: ck-web
+
+https://github.com/ctuning/ck-web
+
+  cd /home/vitis-ai-user/CK/ck-web
+  git clone https://github.com/ctuning/ck-web /home/vitis-ai-user/CK/ck-web
+
+Cloning into '/home/vitis-ai-user/CK/ck-web'...
+remote: Enumerating objects: 2107, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 2107 (delta 2), reused 7 (delta 2), pack-reused 2099
+Receiving objects: 100% (2107/2107), 6.83 MiB | 17.79 MiB/s, done.
+Resolving deltas: 100% (1156/1156), done.
+
+Cloned repository has the following info:
+ UID                = 215d441c19db1fed
+ UOA                = ck-web
+ User friendly name = CK web
+
+
+CK repository successfully registered!
+
+CK repo description path = /home/vitis-ai-user/CK/local/repo/ck-web
+CK repo UID              = 215d441c19db1fed
+
+Recaching repos to speed up access ...
+
+Skipping repo local ...
+Skipping repo default ...
+Processing repo ck-web ...
+Processing repo ck-env ...
+Processing repo remote-ck ...
+
+Repositories were successfully recached!
+  ========================================
+  Checking dependencies on other repos ...
+
+  No dependencies on other repositories found!
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > python -m ck install package:imagenet-2012-val-min
+
+Searching if CK environment for this package already exists using:
+  * Tags: image-classification,dataset,imagenet,2012,val,min,raw,original,jpg,caffe,ilsvrc2012,ilsvrc2012min,small_dataset,non-resized,channel-stable,host-os-linux-64,target-os-linux-64,64bits
+
+CK environment not found for this package ...
+
+*** Installation path used: /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+
+
+Installing to /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+
+
+Checking whether '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar' already exists ...
+
+Downloading ILSVRC'12 validation dataset from 'https://www.dropbox.com/s/57s11df6pts3z69/ILSVRC2012_img_val_500.tar' ...
+--2022-11-11 12:04:17--  https://www.dropbox.com/s/57s11df6pts3z69/ILSVRC2012_img_val_500.tar
+Resolving www.dropbox.com (www.dropbox.com)... 162.125.8.18, 2620:100:601b:18::a27d:812
+Connecting to www.dropbox.com (www.dropbox.com)|162.125.8.18|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /s/raw/57s11df6pts3z69/ILSVRC2012_img_val_500.tar [following]
+--2022-11-11 12:04:17--  https://www.dropbox.com/s/raw/57s11df6pts3z69/ILSVRC2012_img_val_500.tar
+Reusing existing connection to www.dropbox.com:443.
+HTTP request sent, awaiting response... 302 Found
+Location: https://uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com/cd/0/inline/BwkBelIni3FblkQBaGpvFXkksMQFRK1tbZbRJbo-BpgkMeJB-NsC4y06gS3QQcJIhr8RiTDOSjw5l0cwJC5Q99sNipxkd9rmMAbnZdm4qVIo_jOIg2EuA122UJ5LuXzY72zET2GSLze2dBFF_RA4aPMQBgUf9CxsEM_-ffAUwuxOaw/file# [following]
+--2022-11-11 12:04:18--  https://uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com/cd/0/inline/BwkBelIni3FblkQBaGpvFXkksMQFRK1tbZbRJbo-BpgkMeJB-NsC4y06gS3QQcJIhr8RiTDOSjw5l0cwJC5Q99sNipxkd9rmMAbnZdm4qVIo_jOIg2EuA122UJ5LuXzY72zET2GSLze2dBFF_RA4aPMQBgUf9CxsEM_-ffAUwuxOaw/file
+Resolving uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com (uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com)... 162.125.8.15, 2620:100:601b:15::a27d:80f
+Connecting to uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com (uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com)|162.125.8.15|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cd/0/inline2/BwluliG_Y-62RMPbSd4gaPLliToz8Pg_4S4dIesoOIPXSf2l2Uew017Aw6vlxXSZTina1KBDoKPZZ6ylMd93DPYdWaxArg657V8JvaJ7NUsRmOE-KAkBzAlMJOUvT6H_fGVHySlwlX1dDV_C_tdbSJhZK2Jz-q9mKtta5s0nh8Vc9UyWO_xcEgOjYMLoMdCxkgNOpFOhnJI6Yh06D2s0egFWOkTn0WdNOQHSlgE2-haMGdRMy7zWy2MyOKQy4gsaLsOcC9xGdkA6b5H1aEUoeNjGNLEzZmW-PLhKjqNSd6Jv64xDZJ2a2HdLOHBxvPGwSxfM3_x0H-DxTBsgvGqlbr8NylN5WXwCt0V13t1Xx_KRkyo5BbpSdiiFBlzJ2-3UUvc4A2SNOwXDOfgEPWoiF2djtav9Zv0ICngj2n6nPE3HYA/file [following]
+--2022-11-11 12:04:18--  https://uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com/cd/0/inline2/BwluliG_Y-62RMPbSd4gaPLliToz8Pg_4S4dIesoOIPXSf2l2Uew017Aw6vlxXSZTina1KBDoKPZZ6ylMd93DPYdWaxArg657V8JvaJ7NUsRmOE-KAkBzAlMJOUvT6H_fGVHySlwlX1dDV_C_tdbSJhZK2Jz-q9mKtta5s0nh8Vc9UyWO_xcEgOjYMLoMdCxkgNOpFOhnJI6Yh06D2s0egFWOkTn0WdNOQHSlgE2-haMGdRMy7zWy2MyOKQy4gsaLsOcC9xGdkA6b5H1aEUoeNjGNLEzZmW-PLhKjqNSd6Jv64xDZJ2a2HdLOHBxvPGwSxfM3_x0H-DxTBsgvGqlbr8NylN5WXwCt0V13t1Xx_KRkyo5BbpSdiiFBlzJ2-3UUvc4A2SNOwXDOfgEPWoiF2djtav9Zv0ICngj2n6nPE3HYA/file
+Reusing existing connection to uc159d4786e1458b7a4768d8cec8.dl.dropboxusercontent.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 66242560 (63M) [application/x-tar]
+Saving to: ‘/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar’
+
+/home/vitis-ai-user 100%[===================>]  63.17M  82.5MB/s    in 0.8s    
+
+2022-11-11 12:04:20 (82.5 MB/s) - ‘/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar’ saved [66242560/66242560]
+
+
+Calculating the MD5 hash of '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar' ...
+
+Validating the MD5 hash of '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar' ...
+Calculated MD5 hash: 8627befdd8c2bcf305729020e9db354e
+Reference MD5 hash: 8627befdd8c2bcf305729020e9db354e
+
+Unpacking '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar' ...
+ILSVRC2012_val_00000001.JPEG
+ILSVRC2012_val_00000002.JPEG
+ILSVRC2012_val_00000003.JPEG
+ILSVRC2012_val_00000004.JPEG
+ILSVRC2012_val_00000005.JPEG
+ILSVRC2012_val_00000006.JPEG
+ILSVRC2012_val_00000007.JPEG
+ILSVRC2012_val_00000008.JPEG
+ILSVRC2012_val_00000009.JPEG
+ILSVRC2012_val_00000010.JPEG
+ILSVRC2012_val_00000011.JPEG
+ILSVRC2012_val_00000012.JPEG
+ILSVRC2012_val_00000013.JPEG
+ILSVRC2012_val_00000014.JPEG
+ILSVRC2012_val_00000015.JPEG
+ILSVRC2012_val_00000016.JPEG
+ILSVRC2012_val_00000017.JPEG
+ILSVRC2012_val_00000018.JPEG
+ILSVRC2012_val_00000019.JPEG
+ILSVRC2012_val_00000020.JPEG
+ILSVRC2012_val_00000021.JPEG
+ILSVRC2012_val_00000022.JPEG
+ILSVRC2012_val_00000023.JPEG
+ILSVRC2012_val_00000024.JPEG
+ILSVRC2012_val_00000025.JPEG
+ILSVRC2012_val_00000026.JPEG
+ILSVRC2012_val_00000027.JPEG
+ILSVRC2012_val_00000028.JPEG
+ILSVRC2012_val_00000029.JPEG
+ILSVRC2012_val_00000030.JPEG
+ILSVRC2012_val_00000031.JPEG
+ILSVRC2012_val_00000032.JPEG
+ILSVRC2012_val_00000033.JPEG
+ILSVRC2012_val_00000034.JPEG
+ILSVRC2012_val_00000035.JPEG
+ILSVRC2012_val_00000036.JPEG
+ILSVRC2012_val_00000037.JPEG
+ILSVRC2012_val_00000038.JPEG
+ILSVRC2012_val_00000039.JPEG
+ILSVRC2012_val_00000040.JPEG
+ILSVRC2012_val_00000041.JPEG
+ILSVRC2012_val_00000042.JPEG
+ILSVRC2012_val_00000043.JPEG
+ILSVRC2012_val_00000044.JPEG
+ILSVRC2012_val_00000045.JPEG
+ILSVRC2012_val_00000046.JPEG
+ILSVRC2012_val_00000047.JPEG
+ILSVRC2012_val_00000048.JPEG
+ILSVRC2012_val_00000049.JPEG
+ILSVRC2012_val_00000050.JPEG
+ILSVRC2012_val_00000051.JPEG
+ILSVRC2012_val_00000052.JPEG
+ILSVRC2012_val_00000053.JPEG
+ILSVRC2012_val_00000054.JPEG
+ILSVRC2012_val_00000055.JPEG
+ILSVRC2012_val_00000056.JPEG
+ILSVRC2012_val_00000057.JPEG
+ILSVRC2012_val_00000058.JPEG
+ILSVRC2012_val_00000059.JPEG
+ILSVRC2012_val_00000060.JPEG
+ILSVRC2012_val_00000061.JPEG
+ILSVRC2012_val_00000062.JPEG
+ILSVRC2012_val_00000063.JPEG
+ILSVRC2012_val_00000064.JPEG
+ILSVRC2012_val_00000065.JPEG
+ILSVRC2012_val_00000066.JPEG
+ILSVRC2012_val_00000067.JPEG
+ILSVRC2012_val_00000068.JPEG
+ILSVRC2012_val_00000069.JPEG
+ILSVRC2012_val_00000070.JPEG
+ILSVRC2012_val_00000071.JPEG
+ILSVRC2012_val_00000072.JPEG
+ILSVRC2012_val_00000073.JPEG
+ILSVRC2012_val_00000074.JPEG
+ILSVRC2012_val_00000075.JPEG
+ILSVRC2012_val_00000076.JPEG
+ILSVRC2012_val_00000077.JPEG
+ILSVRC2012_val_00000078.JPEG
+ILSVRC2012_val_00000079.JPEG
+ILSVRC2012_val_00000080.JPEG
+ILSVRC2012_val_00000081.JPEG
+ILSVRC2012_val_00000082.JPEG
+ILSVRC2012_val_00000083.JPEG
+ILSVRC2012_val_00000084.JPEG
+ILSVRC2012_val_00000085.JPEG
+ILSVRC2012_val_00000086.JPEG
+ILSVRC2012_val_00000087.JPEG
+ILSVRC2012_val_00000088.JPEG
+ILSVRC2012_val_00000089.JPEG
+ILSVRC2012_val_00000090.JPEG
+ILSVRC2012_val_00000091.JPEG
+ILSVRC2012_val_00000092.JPEG
+ILSVRC2012_val_00000093.JPEG
+ILSVRC2012_val_00000094.JPEG
+ILSVRC2012_val_00000095.JPEG
+ILSVRC2012_val_00000096.JPEG
+ILSVRC2012_val_00000097.JPEG
+ILSVRC2012_val_00000098.JPEG
+ILSVRC2012_val_00000099.JPEG
+ILSVRC2012_val_00000100.JPEG
+ILSVRC2012_val_00000101.JPEG
+ILSVRC2012_val_00000102.JPEG
+ILSVRC2012_val_00000103.JPEG
+ILSVRC2012_val_00000104.JPEG
+ILSVRC2012_val_00000105.JPEG
+ILSVRC2012_val_00000106.JPEG
+ILSVRC2012_val_00000107.JPEG
+ILSVRC2012_val_00000108.JPEG
+ILSVRC2012_val_00000109.JPEG
+ILSVRC2012_val_00000110.JPEG
+ILSVRC2012_val_00000111.JPEG
+ILSVRC2012_val_00000112.JPEG
+ILSVRC2012_val_00000113.JPEG
+ILSVRC2012_val_00000114.JPEG
+ILSVRC2012_val_00000115.JPEG
+ILSVRC2012_val_00000116.JPEG
+ILSVRC2012_val_00000117.JPEG
+ILSVRC2012_val_00000118.JPEG
+ILSVRC2012_val_00000119.JPEG
+ILSVRC2012_val_00000120.JPEG
+ILSVRC2012_val_00000121.JPEG
+ILSVRC2012_val_00000122.JPEG
+ILSVRC2012_val_00000123.JPEG
+ILSVRC2012_val_00000124.JPEG
+ILSVRC2012_val_00000125.JPEG
+ILSVRC2012_val_00000126.JPEG
+ILSVRC2012_val_00000127.JPEG
+ILSVRC2012_val_00000128.JPEG
+ILSVRC2012_val_00000129.JPEG
+ILSVRC2012_val_00000130.JPEG
+ILSVRC2012_val_00000131.JPEG
+ILSVRC2012_val_00000132.JPEG
+ILSVRC2012_val_00000133.JPEG
+ILSVRC2012_val_00000134.JPEG
+ILSVRC2012_val_00000135.JPEG
+ILSVRC2012_val_00000136.JPEG
+ILSVRC2012_val_00000137.JPEG
+ILSVRC2012_val_00000138.JPEG
+ILSVRC2012_val_00000139.JPEG
+ILSVRC2012_val_00000140.JPEG
+ILSVRC2012_val_00000141.JPEG
+ILSVRC2012_val_00000142.JPEG
+ILSVRC2012_val_00000143.JPEG
+ILSVRC2012_val_00000144.JPEG
+ILSVRC2012_val_00000145.JPEG
+ILSVRC2012_val_00000146.JPEG
+ILSVRC2012_val_00000147.JPEG
+ILSVRC2012_val_00000148.JPEG
+ILSVRC2012_val_00000149.JPEG
+ILSVRC2012_val_00000150.JPEG
+ILSVRC2012_val_00000151.JPEG
+ILSVRC2012_val_00000152.JPEG
+ILSVRC2012_val_00000153.JPEG
+ILSVRC2012_val_00000154.JPEG
+ILSVRC2012_val_00000155.JPEG
+ILSVRC2012_val_00000156.JPEG
+ILSVRC2012_val_00000157.JPEG
+ILSVRC2012_val_00000158.JPEG
+ILSVRC2012_val_00000159.JPEG
+ILSVRC2012_val_00000160.JPEG
+ILSVRC2012_val_00000161.JPEG
+ILSVRC2012_val_00000162.JPEG
+ILSVRC2012_val_00000163.JPEG
+ILSVRC2012_val_00000164.JPEG
+ILSVRC2012_val_00000165.JPEG
+ILSVRC2012_val_00000166.JPEG
+ILSVRC2012_val_00000167.JPEG
+ILSVRC2012_val_00000168.JPEG
+ILSVRC2012_val_00000169.JPEG
+ILSVRC2012_val_00000170.JPEG
+ILSVRC2012_val_00000171.JPEG
+ILSVRC2012_val_00000172.JPEG
+ILSVRC2012_val_00000173.JPEG
+ILSVRC2012_val_00000174.JPEG
+ILSVRC2012_val_00000175.JPEG
+ILSVRC2012_val_00000176.JPEG
+ILSVRC2012_val_00000177.JPEG
+ILSVRC2012_val_00000178.JPEG
+ILSVRC2012_val_00000179.JPEG
+ILSVRC2012_val_00000180.JPEG
+ILSVRC2012_val_00000181.JPEG
+ILSVRC2012_val_00000182.JPEG
+ILSVRC2012_val_00000183.JPEG
+ILSVRC2012_val_00000184.JPEG
+ILSVRC2012_val_00000185.JPEG
+ILSVRC2012_val_00000186.JPEG
+ILSVRC2012_val_00000187.JPEG
+ILSVRC2012_val_00000188.JPEG
+ILSVRC2012_val_00000189.JPEG
+ILSVRC2012_val_00000190.JPEG
+ILSVRC2012_val_00000191.JPEG
+ILSVRC2012_val_00000192.JPEG
+ILSVRC2012_val_00000193.JPEG
+ILSVRC2012_val_00000194.JPEG
+ILSVRC2012_val_00000195.JPEG
+ILSVRC2012_val_00000196.JPEG
+ILSVRC2012_val_00000197.JPEG
+ILSVRC2012_val_00000198.JPEG
+ILSVRC2012_val_00000199.JPEG
+ILSVRC2012_val_00000200.JPEG
+ILSVRC2012_val_00000201.JPEG
+ILSVRC2012_val_00000202.JPEG
+ILSVRC2012_val_00000203.JPEG
+ILSVRC2012_val_00000204.JPEG
+ILSVRC2012_val_00000205.JPEG
+ILSVRC2012_val_00000206.JPEG
+ILSVRC2012_val_00000207.JPEG
+ILSVRC2012_val_00000208.JPEG
+ILSVRC2012_val_00000209.JPEG
+ILSVRC2012_val_00000210.JPEG
+ILSVRC2012_val_00000211.JPEG
+ILSVRC2012_val_00000212.JPEG
+ILSVRC2012_val_00000213.JPEG
+ILSVRC2012_val_00000214.JPEG
+ILSVRC2012_val_00000215.JPEG
+ILSVRC2012_val_00000216.JPEG
+ILSVRC2012_val_00000217.JPEG
+ILSVRC2012_val_00000218.JPEG
+ILSVRC2012_val_00000219.JPEG
+ILSVRC2012_val_00000220.JPEG
+ILSVRC2012_val_00000221.JPEG
+ILSVRC2012_val_00000222.JPEG
+ILSVRC2012_val_00000223.JPEG
+ILSVRC2012_val_00000224.JPEG
+ILSVRC2012_val_00000225.JPEG
+ILSVRC2012_val_00000226.JPEG
+ILSVRC2012_val_00000227.JPEG
+ILSVRC2012_val_00000228.JPEG
+ILSVRC2012_val_00000229.JPEG
+ILSVRC2012_val_00000230.JPEG
+ILSVRC2012_val_00000231.JPEG
+ILSVRC2012_val_00000232.JPEG
+ILSVRC2012_val_00000233.JPEG
+ILSVRC2012_val_00000234.JPEG
+ILSVRC2012_val_00000235.JPEG
+ILSVRC2012_val_00000236.JPEG
+ILSVRC2012_val_00000237.JPEG
+ILSVRC2012_val_00000238.JPEG
+ILSVRC2012_val_00000239.JPEG
+ILSVRC2012_val_00000240.JPEG
+ILSVRC2012_val_00000241.JPEG
+ILSVRC2012_val_00000242.JPEG
+ILSVRC2012_val_00000243.JPEG
+ILSVRC2012_val_00000244.JPEG
+ILSVRC2012_val_00000245.JPEG
+ILSVRC2012_val_00000246.JPEG
+ILSVRC2012_val_00000247.JPEG
+ILSVRC2012_val_00000248.JPEG
+ILSVRC2012_val_00000249.JPEG
+ILSVRC2012_val_00000250.JPEG
+ILSVRC2012_val_00000251.JPEG
+ILSVRC2012_val_00000252.JPEG
+ILSVRC2012_val_00000253.JPEG
+ILSVRC2012_val_00000254.JPEG
+ILSVRC2012_val_00000255.JPEG
+ILSVRC2012_val_00000256.JPEG
+ILSVRC2012_val_00000257.JPEG
+ILSVRC2012_val_00000258.JPEG
+ILSVRC2012_val_00000259.JPEG
+ILSVRC2012_val_00000260.JPEG
+ILSVRC2012_val_00000261.JPEG
+ILSVRC2012_val_00000262.JPEG
+ILSVRC2012_val_00000263.JPEG
+ILSVRC2012_val_00000264.JPEG
+ILSVRC2012_val_00000265.JPEG
+ILSVRC2012_val_00000266.JPEG
+ILSVRC2012_val_00000267.JPEG
+ILSVRC2012_val_00000268.JPEG
+ILSVRC2012_val_00000269.JPEG
+ILSVRC2012_val_00000270.JPEG
+ILSVRC2012_val_00000271.JPEG
+ILSVRC2012_val_00000272.JPEG
+ILSVRC2012_val_00000273.JPEG
+ILSVRC2012_val_00000274.JPEG
+ILSVRC2012_val_00000275.JPEG
+ILSVRC2012_val_00000276.JPEG
+ILSVRC2012_val_00000277.JPEG
+ILSVRC2012_val_00000278.JPEG
+ILSVRC2012_val_00000279.JPEG
+ILSVRC2012_val_00000280.JPEG
+ILSVRC2012_val_00000281.JPEG
+ILSVRC2012_val_00000282.JPEG
+ILSVRC2012_val_00000283.JPEG
+ILSVRC2012_val_00000284.JPEG
+ILSVRC2012_val_00000285.JPEG
+ILSVRC2012_val_00000286.JPEG
+ILSVRC2012_val_00000287.JPEG
+ILSVRC2012_val_00000288.JPEG
+ILSVRC2012_val_00000289.JPEG
+ILSVRC2012_val_00000290.JPEG
+ILSVRC2012_val_00000291.JPEG
+ILSVRC2012_val_00000292.JPEG
+ILSVRC2012_val_00000293.JPEG
+ILSVRC2012_val_00000294.JPEG
+ILSVRC2012_val_00000295.JPEG
+ILSVRC2012_val_00000296.JPEG
+ILSVRC2012_val_00000297.JPEG
+ILSVRC2012_val_00000298.JPEG
+ILSVRC2012_val_00000299.JPEG
+ILSVRC2012_val_00000300.JPEG
+ILSVRC2012_val_00000301.JPEG
+ILSVRC2012_val_00000302.JPEG
+ILSVRC2012_val_00000303.JPEG
+ILSVRC2012_val_00000304.JPEG
+ILSVRC2012_val_00000305.JPEG
+ILSVRC2012_val_00000306.JPEG
+ILSVRC2012_val_00000307.JPEG
+ILSVRC2012_val_00000308.JPEG
+ILSVRC2012_val_00000309.JPEG
+ILSVRC2012_val_00000310.JPEG
+ILSVRC2012_val_00000311.JPEG
+ILSVRC2012_val_00000312.JPEG
+ILSVRC2012_val_00000313.JPEG
+ILSVRC2012_val_00000314.JPEG
+ILSVRC2012_val_00000315.JPEG
+ILSVRC2012_val_00000316.JPEG
+ILSVRC2012_val_00000317.JPEG
+ILSVRC2012_val_00000318.JPEG
+ILSVRC2012_val_00000319.JPEG
+ILSVRC2012_val_00000320.JPEG
+ILSVRC2012_val_00000321.JPEG
+ILSVRC2012_val_00000322.JPEG
+ILSVRC2012_val_00000323.JPEG
+ILSVRC2012_val_00000324.JPEG
+ILSVRC2012_val_00000325.JPEG
+ILSVRC2012_val_00000326.JPEG
+ILSVRC2012_val_00000327.JPEG
+ILSVRC2012_val_00000328.JPEG
+ILSVRC2012_val_00000329.JPEG
+ILSVRC2012_val_00000330.JPEG
+ILSVRC2012_val_00000331.JPEG
+ILSVRC2012_val_00000332.JPEG
+ILSVRC2012_val_00000333.JPEG
+ILSVRC2012_val_00000334.JPEG
+ILSVRC2012_val_00000335.JPEG
+ILSVRC2012_val_00000336.JPEG
+ILSVRC2012_val_00000337.JPEG
+ILSVRC2012_val_00000338.JPEG
+ILSVRC2012_val_00000339.JPEG
+ILSVRC2012_val_00000340.JPEG
+ILSVRC2012_val_00000341.JPEG
+ILSVRC2012_val_00000342.JPEG
+ILSVRC2012_val_00000343.JPEG
+ILSVRC2012_val_00000344.JPEG
+ILSVRC2012_val_00000345.JPEG
+ILSVRC2012_val_00000346.JPEG
+ILSVRC2012_val_00000347.JPEG
+ILSVRC2012_val_00000348.JPEG
+ILSVRC2012_val_00000349.JPEG
+ILSVRC2012_val_00000350.JPEG
+ILSVRC2012_val_00000351.JPEG
+ILSVRC2012_val_00000352.JPEG
+ILSVRC2012_val_00000353.JPEG
+ILSVRC2012_val_00000354.JPEG
+ILSVRC2012_val_00000355.JPEG
+ILSVRC2012_val_00000356.JPEG
+ILSVRC2012_val_00000357.JPEG
+ILSVRC2012_val_00000358.JPEG
+ILSVRC2012_val_00000359.JPEG
+ILSVRC2012_val_00000360.JPEG
+ILSVRC2012_val_00000361.JPEG
+ILSVRC2012_val_00000362.JPEG
+ILSVRC2012_val_00000363.JPEG
+ILSVRC2012_val_00000364.JPEG
+ILSVRC2012_val_00000365.JPEG
+ILSVRC2012_val_00000366.JPEG
+ILSVRC2012_val_00000367.JPEG
+ILSVRC2012_val_00000368.JPEG
+ILSVRC2012_val_00000369.JPEG
+ILSVRC2012_val_00000370.JPEG
+ILSVRC2012_val_00000371.JPEG
+ILSVRC2012_val_00000372.JPEG
+ILSVRC2012_val_00000373.JPEG
+ILSVRC2012_val_00000374.JPEG
+ILSVRC2012_val_00000375.JPEG
+ILSVRC2012_val_00000376.JPEG
+ILSVRC2012_val_00000377.JPEG
+ILSVRC2012_val_00000378.JPEG
+ILSVRC2012_val_00000379.JPEG
+ILSVRC2012_val_00000380.JPEG
+ILSVRC2012_val_00000381.JPEG
+ILSVRC2012_val_00000382.JPEG
+ILSVRC2012_val_00000383.JPEG
+ILSVRC2012_val_00000384.JPEG
+ILSVRC2012_val_00000385.JPEG
+ILSVRC2012_val_00000386.JPEG
+ILSVRC2012_val_00000387.JPEG
+ILSVRC2012_val_00000388.JPEG
+ILSVRC2012_val_00000389.JPEG
+ILSVRC2012_val_00000390.JPEG
+ILSVRC2012_val_00000391.JPEG
+ILSVRC2012_val_00000392.JPEG
+ILSVRC2012_val_00000393.JPEG
+ILSVRC2012_val_00000394.JPEG
+ILSVRC2012_val_00000395.JPEG
+ILSVRC2012_val_00000396.JPEG
+ILSVRC2012_val_00000397.JPEG
+ILSVRC2012_val_00000398.JPEG
+ILSVRC2012_val_00000399.JPEG
+ILSVRC2012_val_00000400.JPEG
+ILSVRC2012_val_00000401.JPEG
+ILSVRC2012_val_00000402.JPEG
+ILSVRC2012_val_00000403.JPEG
+ILSVRC2012_val_00000404.JPEG
+ILSVRC2012_val_00000405.JPEG
+ILSVRC2012_val_00000406.JPEG
+ILSVRC2012_val_00000407.JPEG
+ILSVRC2012_val_00000408.JPEG
+ILSVRC2012_val_00000409.JPEG
+ILSVRC2012_val_00000410.JPEG
+ILSVRC2012_val_00000411.JPEG
+ILSVRC2012_val_00000412.JPEG
+ILSVRC2012_val_00000413.JPEG
+ILSVRC2012_val_00000414.JPEG
+ILSVRC2012_val_00000415.JPEG
+ILSVRC2012_val_00000416.JPEG
+ILSVRC2012_val_00000417.JPEG
+ILSVRC2012_val_00000418.JPEG
+ILSVRC2012_val_00000419.JPEG
+ILSVRC2012_val_00000420.JPEG
+ILSVRC2012_val_00000421.JPEG
+ILSVRC2012_val_00000422.JPEG
+ILSVRC2012_val_00000423.JPEG
+ILSVRC2012_val_00000424.JPEG
+ILSVRC2012_val_00000425.JPEG
+ILSVRC2012_val_00000426.JPEG
+ILSVRC2012_val_00000427.JPEG
+ILSVRC2012_val_00000428.JPEG
+ILSVRC2012_val_00000429.JPEG
+ILSVRC2012_val_00000430.JPEG
+ILSVRC2012_val_00000431.JPEG
+ILSVRC2012_val_00000432.JPEG
+ILSVRC2012_val_00000433.JPEG
+ILSVRC2012_val_00000434.JPEG
+ILSVRC2012_val_00000435.JPEG
+ILSVRC2012_val_00000436.JPEG
+ILSVRC2012_val_00000437.JPEG
+ILSVRC2012_val_00000438.JPEG
+ILSVRC2012_val_00000439.JPEG
+ILSVRC2012_val_00000440.JPEG
+ILSVRC2012_val_00000441.JPEG
+ILSVRC2012_val_00000442.JPEG
+ILSVRC2012_val_00000443.JPEG
+ILSVRC2012_val_00000444.JPEG
+ILSVRC2012_val_00000445.JPEG
+ILSVRC2012_val_00000446.JPEG
+ILSVRC2012_val_00000447.JPEG
+ILSVRC2012_val_00000448.JPEG
+ILSVRC2012_val_00000449.JPEG
+ILSVRC2012_val_00000450.JPEG
+ILSVRC2012_val_00000451.JPEG
+ILSVRC2012_val_00000452.JPEG
+ILSVRC2012_val_00000453.JPEG
+ILSVRC2012_val_00000454.JPEG
+ILSVRC2012_val_00000455.JPEG
+ILSVRC2012_val_00000456.JPEG
+ILSVRC2012_val_00000457.JPEG
+ILSVRC2012_val_00000458.JPEG
+ILSVRC2012_val_00000459.JPEG
+ILSVRC2012_val_00000460.JPEG
+ILSVRC2012_val_00000461.JPEG
+ILSVRC2012_val_00000462.JPEG
+ILSVRC2012_val_00000463.JPEG
+ILSVRC2012_val_00000464.JPEG
+ILSVRC2012_val_00000465.JPEG
+ILSVRC2012_val_00000466.JPEG
+ILSVRC2012_val_00000467.JPEG
+ILSVRC2012_val_00000468.JPEG
+ILSVRC2012_val_00000469.JPEG
+ILSVRC2012_val_00000470.JPEG
+ILSVRC2012_val_00000471.JPEG
+ILSVRC2012_val_00000472.JPEG
+ILSVRC2012_val_00000473.JPEG
+ILSVRC2012_val_00000474.JPEG
+ILSVRC2012_val_00000475.JPEG
+ILSVRC2012_val_00000476.JPEG
+ILSVRC2012_val_00000477.JPEG
+ILSVRC2012_val_00000478.JPEG
+ILSVRC2012_val_00000479.JPEG
+ILSVRC2012_val_00000480.JPEG
+ILSVRC2012_val_00000481.JPEG
+ILSVRC2012_val_00000482.JPEG
+ILSVRC2012_val_00000483.JPEG
+ILSVRC2012_val_00000484.JPEG
+ILSVRC2012_val_00000485.JPEG
+ILSVRC2012_val_00000486.JPEG
+ILSVRC2012_val_00000487.JPEG
+ILSVRC2012_val_00000488.JPEG
+ILSVRC2012_val_00000489.JPEG
+ILSVRC2012_val_00000490.JPEG
+ILSVRC2012_val_00000491.JPEG
+ILSVRC2012_val_00000492.JPEG
+ILSVRC2012_val_00000493.JPEG
+ILSVRC2012_val_00000494.JPEG
+ILSVRC2012_val_00000495.JPEG
+ILSVRC2012_val_00000496.JPEG
+ILSVRC2012_val_00000497.JPEG
+ILSVRC2012_val_00000498.JPEG
+ILSVRC2012_val_00000499.JPEG
+ILSVRC2012_val_00000500.JPEG
+
+Removing '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_img_val.tar' ...
+
+Successfully installed the ILSVRC'12 validation dataset ...
+
+Setting up environment for installed package ...
+  (full path = /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000001.JPEG)
+
+  Software entry found: dataset.imagenet.val (ff47fc6a33b4b03b)
+
+Environment entry added (39adc4c0485ab42c)!
+
+Recording CK configuration to /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ck-install.json ...
+
+Installation path: /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+
+Installation time: 3.0371530055999756 sec.
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > python -m ck install package:imagenet-2012-aux --tags=from.berkeley
+
+  Package found: imagenet-2012-aux (4e3e9dd897f125bb)
+
+
+Searching if CK environment for this package already exists using:
+  * Tags: image-classification,dataset,imagenet,2012,aux,caffe,ilsvrc2012,channel-stable,from.berkeley,host-os-linux-64,target-os-linux-64,64bits
+
+CK environment not found for this package ...
+
+*** Installation path used: /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley
+
+
+Installing to /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley
+
+
+Checking whether '/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/caffe_ilsvrc12.tar.gz' already exists ...
+
+Downloading ILSVRC'12 aux dataset from 'http://dl.caffe.berkeleyvision.org//caffe_ilsvrc12.tar.gz' ...
+--2022-11-11 12:04:20--  http://dl.caffe.berkeleyvision.org//caffe_ilsvrc12.tar.gz
+Resolving dl.caffe.berkeleyvision.org (dl.caffe.berkeleyvision.org)... 128.32.162.150
+Connecting to dl.caffe.berkeleyvision.org (dl.caffe.berkeleyvision.org)|128.32.162.150|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 17858008 (17M) [application/octet-stream]
+Saving to: ‘/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/caffe_ilsvrc12.tar.gz’
+
+/home/vitis-ai-user 100%[===================>]  17.03M  43.4KB/s    in 5m 27s  
+
+2022-11-11 12:09:50 (53.3 KB/s) - ‘/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/caffe_ilsvrc12.tar.gz’ saved [17858008/17858008]
+
+
+Calculating the MD5 hash of 'caffe_ilsvrc12.tar.gz' ...
+
+Validating the MD5 hash of 'caffe_ilsvrc12.tar.gz' ...
+Calculated MD5 hash: f963098ea0e785a968ca1eb634003a90
+Reference MD5 hash: f963098ea0e785a968ca1eb634003a90
+
+Unpacking 'caffe_ilsvrc12.tar.gz' ...
+
+Successfully installed the ILSVRC'12 aux dataset validation dataset ...
+
+Setting up environment for installed package ...
+  (full path = /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/imagenet_mean.binaryproto)
+
+  Software entry found: dataset.imagenet.aux (167d823440e6a59a)
+
+Environment entry added (9eacda72ed4a67a9)!
+
+Recording CK configuration to /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/ck-install.json ...
+
+Installation path: /home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley
+
+Installation time: 330.0700399875641 sec.
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > head -n 500 ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/val.txt > ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/val.txt
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > 
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > vai_q_tensorflow quantize --input_frozen_graph inception_v1_inference.pb --input_nodes input --output_nodes InceptionV1/Logits/Predictions/Reshape_1 --input_fn utils.input_fn_inception_v1_tf --input_shapes ?,224,224,3 --calib_iter 50
+INFO: Checking Float Graph...
+/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000001.JPEG
+INFO: Float Graph Check Done.
+2022-11-11 12:10:06.692390: W tensorflow/contrib/decent_q/utils/quantize_utils.cc:752] [DECENT_WARNING] Scale output of avg_pool node InceptionV1/Logits/AvgPool_0a_7x7/AvgPool to simulate DPU. Kernel size is 7 * 7
+INFO: Calibrating for 50 iterations...
+  0% (0 of 50) |                         | Elapsed Time: 0:00:00 ETA:  --:--:--/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000001.JPEG
+  2% (1 of 50) |                         | Elapsed Time: 0:00:00 ETA:   0:00:24/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000002.JPEG
+  4% (2 of 50) |#                        | Elapsed Time: 0:00:00 ETA:   0:00:22/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000003.JPEG
+  6% (3 of 50) |#                        | Elapsed Time: 0:00:01 ETA:   0:00:20/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000004.JPEG
+  8% (4 of 50) |##                       | Elapsed Time: 0:00:01 ETA:   0:00:19/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000005.JPEG
+ 10% (5 of 50) |##                       | Elapsed Time: 0:00:02 ETA:   0:00:19/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000006.JPEG
+ 12% (6 of 50) |###                      | Elapsed Time: 0:00:02 ETA:   0:00:18/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000007.JPEG
+ 14% (7 of 50) |###                      | Elapsed Time: 0:00:02 ETA:   0:00:17/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000008.JPEG
+ 16% (8 of 50) |####                     | Elapsed Time: 0:00:03 ETA:   0:00:17/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000009.JPEG
+ 18% (9 of 50) |####                     | Elapsed Time: 0:00:03 ETA:   0:00:16/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000010.JPEG
+ 20% (10 of 50) |####                    | Elapsed Time: 0:00:04 ETA:   0:00:16/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000011.JPEG
+ 22% (11 of 50) |#####                   | Elapsed Time: 0:00:04 ETA:   0:00:16/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000012.JPEG
+ 24% (12 of 50) |#####                   | Elapsed Time: 0:00:05 ETA:   0:00:15/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000013.JPEG
+ 26% (13 of 50) |######                  | Elapsed Time: 0:00:05 ETA:   0:00:15/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000014.JPEG
+ 28% (14 of 50) |######                  | Elapsed Time: 0:00:05 ETA:   0:00:15/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000015.JPEG
+ 30% (15 of 50) |#######                 | Elapsed Time: 0:00:06 ETA:   0:00:14/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000016.JPEG
+ 32% (16 of 50) |#######                 | Elapsed Time: 0:00:06 ETA:   0:00:14/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000017.JPEG
+ 34% (17 of 50) |########                | Elapsed Time: 0:00:07 ETA:   0:00:13/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000018.JPEG
+ 36% (18 of 50) |########                | Elapsed Time: 0:00:07 ETA:   0:00:13/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000019.JPEG
+ 38% (19 of 50) |#########               | Elapsed Time: 0:00:07 ETA:   0:00:12/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000020.JPEG
+ 40% (20 of 50) |#########               | Elapsed Time: 0:00:08 ETA:   0:00:12/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000021.JPEG
+ 42% (21 of 50) |##########              | Elapsed Time: 0:00:08 ETA:   0:00:12/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000022.JPEG
+ 44% (22 of 50) |##########              | Elapsed Time: 0:00:09 ETA:   0:00:11/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000023.JPEG
+ 46% (23 of 50) |###########             | Elapsed Time: 0:00:09 ETA:   0:00:11/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000024.JPEG
+ 48% (24 of 50) |###########             | Elapsed Time: 0:00:10 ETA:   0:00:10/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000025.JPEG
+ 50% (25 of 50) |############            | Elapsed Time: 0:00:10 ETA:   0:00:10/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000026.JPEG
+ 52% (26 of 50) |############            | Elapsed Time: 0:00:10 ETA:   0:00:09/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000027.JPEG
+ 54% (27 of 50) |############            | Elapsed Time: 0:00:11 ETA:   0:00:09/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000028.JPEG
+ 56% (28 of 50) |#############           | Elapsed Time: 0:00:11 ETA:   0:00:09/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000029.JPEG
+ 58% (29 of 50) |#############           | Elapsed Time: 0:00:12 ETA:   0:00:08/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000030.JPEG
+ 60% (30 of 50) |##############          | Elapsed Time: 0:00:12 ETA:   0:00:08/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000031.JPEG
+ 62% (31 of 50) |##############          | Elapsed Time: 0:00:12 ETA:   0:00:08/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000032.JPEG
+ 64% (32 of 50) |###############         | Elapsed Time: 0:00:13 ETA:   0:00:07/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000033.JPEG
+ 66% (33 of 50) |###############         | Elapsed Time: 0:00:13 ETA:   0:00:07/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000034.JPEG
+ 68% (34 of 50) |################        | Elapsed Time: 0:00:14 ETA:   0:00:06/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000035.JPEG
+ 70% (35 of 50) |################        | Elapsed Time: 0:00:14 ETA:   0:00:06/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000036.JPEG
+ 72% (36 of 50) |#################       | Elapsed Time: 0:00:15 ETA:   0:00:05/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000037.JPEG
+ 74% (37 of 50) |#################       | Elapsed Time: 0:00:15 ETA:   0:00:05/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000038.JPEG
+ 76% (38 of 50) |##################      | Elapsed Time: 0:00:15 ETA:   0:00:05/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000039.JPEG
+ 78% (39 of 50) |##################      | Elapsed Time: 0:00:16 ETA:   0:00:04/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000040.JPEG
+ 80% (40 of 50) |###################     | Elapsed Time: 0:00:16 ETA:   0:00:04/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000041.JPEG
+ 82% (41 of 50) |###################     | Elapsed Time: 0:00:17 ETA:   0:00:03/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000042.JPEG
+ 84% (42 of 50) |####################    | Elapsed Time: 0:00:17 ETA:   0:00:03/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000043.JPEG
+ 86% (43 of 50) |####################    | Elapsed Time: 0:00:18 ETA:   0:00:02/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000044.JPEG
+ 88% (44 of 50) |#####################   | Elapsed Time: 0:00:18 ETA:   0:00:02/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000045.JPEG
+ 90% (45 of 50) |#####################   | Elapsed Time: 0:00:18 ETA:   0:00:02/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000046.JPEG
+ 92% (46 of 50) |######################  | Elapsed Time: 0:00:19 ETA:   0:00:01/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000047.JPEG
+ 94% (47 of 50) |######################  | Elapsed Time: 0:00:19 ETA:   0:00:01/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000048.JPEG
+ 96% (48 of 50) |####################### | Elapsed Time: 0:00:20 ETA:   0:00:00/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000049.JPEG
+ 98% (49 of 50) |####################### | Elapsed Time: 0:00:20 ETA:   0:00:00/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000050.JPEG
+100% (50 of 50) |########################| Elapsed Time: 0:00:20 Time:  0:00:20
+INFO: Calibration Done.
+/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ILSVRC2012_val_00000001.JPEG
+********************* Quantization Summary *********************      
+INFO: Output:       
+  quantize_eval_model: ./quantize_results/quantize_eval_model.pb 
+(vitis-ai-tensorflow) Vitis-AI /workspace/examples/DPUCVDX8H/tf_inception_v1 > 
