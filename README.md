@@ -1,4 +1,4 @@
-# scratch
+# Steps to run Vitis AI  vitis-ai-tensorflow - model inceptionv1
 
 ```
 conda activate vitis-ai-tensorflow
