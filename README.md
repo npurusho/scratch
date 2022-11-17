@@ -33,3 +33,38 @@ vai_c_tensorflow --arch /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK50008PE/arch.js
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+conda activate vitis-ai-tensorflow2
+source /workspace/setup/vck5000/setup.sh DPUCVDX8H_8pe_normal
+
+
+python -m ck pull repo:ck-env
+python -m ck install package:imagenet-2012-val-min
+python -m ck install package:imagenet-2012-aux --tags=from.berkeley
+head -n 500 ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-aux-from.berkeley/val.txt > ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/val.txt
+
+
+cd /workspace/model-zoo/
+python3 downloader.py
+tf2 inceptionv3
+
+
+mkdir /workspace/examples/DPUCVDX8H/tf2_inceptionv3
+mv tf2_inceptionv3_imagenet_299_299_11.5G_2.5.zip /workspace/examples/DPUCVDX8H/tf_inception_v1/
+cd /workspace/examples/DPUCVDX8H/tf2_inceptionv3/
+unzip tf2_inceptionv3_imagenet_299_299_11.5G_2.5.zip
+
+cd tf2_inceptionv3_imagenet_299_299_11.5G_2.5
+mkdir vai_q_output
+python ./code/com/train_eval_h5.py --model ./float/inception_v3_weights_tf.h5 --quantize=true --quantize_output_dir=./vai_q_output --eval_only=true --eval_images=true --eval_image_path=/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/ --eval_image_list=/home/vitis-ai-user/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min/val.txt --label_offset=1 --gpus=0
+
+vai_c_tensorflow --arch /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK50008PE/arch.json --frozen_pb quantize_results/quantize_eval_model.pb --output_dir out --net_name tf_inception_v1_compiled --options '{"input_shape": "1,224,224,3"}'
+vai_c_tensorflow2 -m ./vai_q_output/quantized.h5 -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK50008PE/arch.json -o ./vai_q_output -n inception_v3_tf2 --options '{"input_shape": "4,299,299,3"}'
+
+
+cp -r ../../tf_inception_v1/build.sh .
+./build.sh
+
+./inception_example ./vai_q_output/inception_v3_tf2.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+
+
+```
