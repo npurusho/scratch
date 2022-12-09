@@ -64,6 +64,17 @@ cp -r ../../tf_inception_v1/build.sh .
 ./build.sh
 
 ./inception_example ./vai_q_output/inception_v3_tf2.xmodel ~/CK-TOOLS/dataset-imagenet-ilsvrc2012-val-min
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+cd Vitis-AI
+./docker_run.sh
+source ./run-via-demo.sh
+
+cd /usr/share/vitis_ai_library/models
+tar xvfz inception_v1_tf-vck5000-DPUCVDX8H-8pe-r2.5.0.tar.gz
+cd /workspace/examples/VART/inception_v1_mt_py/
+python3 ./inception_v1.py 16 /usr/share/vitis_ai_library/models/inception_v1_tf/inception_v1_tf.xmodel
 
 
 ```
