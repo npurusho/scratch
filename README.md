@@ -78,3 +78,4 @@ python3 ./inception_v1.py 16 /usr/share/vitis_ai_library/models/inception_v1_tf/
 
 
 ```
+find . -type f -name '*.jpeg' -print0 | xargs -0 rename 's/\.jpeg/\.jpg/'
