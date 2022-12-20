@@ -1,6 +1,8 @@
 # Steps to run Vitis AI  vitis-ai-tensorflow - model inceptionv1
 
 ```
+cd Vitis-AI
+./docker_run.sh
 conda activate vitis-ai-tensorflow
 source /workspace/setup/vck5000/setup.sh DPUCVDX8H_8pe_normal
 
